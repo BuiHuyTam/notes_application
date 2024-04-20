@@ -54,16 +54,16 @@ public class CreateAccountActivity extends AppCompatActivity {
                 new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        changeInProgess(false);
                         if(task.isSuccessful()){
-                            changeInProgess(false);
-                            Toast.makeText(CreateAccountActivity.this,
-                                    "Successfully create account, Check email to verify", Toast.LENGTH_LONG).show();
+                            Utility.showToast(CreateAccountActivity.this,
+                                    "Successfully create account, Check email to verify");
                             firebaseAuth.getCurrentUser().sendEmailVerification();
                             firebaseAuth.signOut();
                             finish();
                         }else{
-                            Toast.makeText(CreateAccountActivity.this,
-                                    task.getException().getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                            Utility.showToast(CreateAccountActivity.this,
+                                    task.getException().getLocalizedMessage());
                         }
                     }
                 });
